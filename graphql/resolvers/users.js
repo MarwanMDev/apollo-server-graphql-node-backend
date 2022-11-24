@@ -80,6 +80,8 @@ module.exports = {
     },
   },
   Query: {
-    user: (_, { ID }) => User.findById(ID),
+    async user(_, { id }) {
+      return await User.findById(id);
+    },
   },
 };
