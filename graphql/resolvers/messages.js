@@ -18,6 +18,11 @@ module.exports = {
     },
   },
   Query: {
-    message: (_, { ID }) => Message.findById(ID),
+    async message(_, { id }) {
+      return await Message.findById(id);
+    },
+    async messages() {
+      return await Message.find();
+    },
   },
 };

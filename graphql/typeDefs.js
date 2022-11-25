@@ -32,6 +32,7 @@ module.exports = gql`
   }
 
   type Query {
+    messages: [Message]
     message(id: ID!): Message
     user(id: ID!): User
   }

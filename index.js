@@ -4,8 +4,6 @@ const {
 } = require('@apollo/server/standalone');
 const dbConnect = require('./db/dbConnect');
 
-// const mongoose = require('mongoose');
-
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
 
