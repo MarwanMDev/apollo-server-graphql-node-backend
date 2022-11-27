@@ -1,23 +1,24 @@
 const gql = require('graphql-tag');
 
 module.exports = gql`
-  type Message {
-    text: String
-    createdAt: String
-    createdBy: String
-  }
-
   type User {
     id: ID!
     username: String
     email: String
     password: String
-    token: String
+    authToken: String
+  }
+
+  type Message {
+    text: String
+    createdAt: String
+    createdBy: User!
   }
 
   input MessageInput {
-    text: String
+    text: String!
     username: String
+    createdBy: ID!
   }
 
   input SignUpInput {
@@ -35,6 +36,7 @@ module.exports = gql`
     messages: [Message]
     message(id: ID!): Message
     user(id: ID!): User
+    getUserByAuthToken(authToken: String): User
   }
 
   type Mutation {

@@ -38,7 +38,7 @@ module.exports = {
         { expiresIn: '2h' }
       );
 
-      newUser.token = token;
+      newUser.authToken = token;
 
       // Save new user to database
       const res = await newUser.save();
@@ -64,7 +64,7 @@ module.exports = {
           { expiresIn: '2h' }
         );
 
-        user.token = token;
+        user.authToken = token;
 
         return {
           id: user.id,
@@ -82,6 +82,9 @@ module.exports = {
   Query: {
     async user(_, { id }) {
       return await User.findById(id);
+    },
+    async getUserByAuthToken(_, { authToken }) {
+      return await User.findOne({ authToken: authToken });
     },
   },
 };
