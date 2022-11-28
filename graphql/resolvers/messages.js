@@ -4,8 +4,11 @@ module.exports = {
   Mutation: {
     async createMessage(
       _,
-      { messageInput: { text, username, createdBy } }
+      { messageInput: { text, username, createdBy } },
+      context
     ) {
+      if (!context.user) return null;
+
       const newMessage = new Message({
         text: text,
         createdBy: createdBy,
@@ -25,9 +28,12 @@ module.exports = {
       return await Message.findById(id);
     },
     async messages(_parent, _args, context) {
-      // if (!context.user || !context.user.roles.includes('admin'))
-      if (!context.user) return null;
       console.log(context.user);
+      // if (!context.user || !context.user.roles.includes('admin'))
+      if (!context.user || context.user.roles !== 'ADMINISTRATOR')
+        return null;
+      // if (!context.user) return null;
+      // console.log(context.user);
       return await Message.find().populate('createdBy');
     },
   },

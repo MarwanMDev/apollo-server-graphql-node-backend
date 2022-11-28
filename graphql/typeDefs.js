@@ -7,12 +7,19 @@ module.exports = gql`
     email: String
     password: String
     authToken: String
+    roles: UserRole!
   }
 
   type Message {
     text: String
     createdAt: String
     createdBy: User!
+  }
+
+  enum UserRole {
+    GUEST
+    DEFAULT
+    ADMINISTRATOR
   }
 
   input MessageInput {
