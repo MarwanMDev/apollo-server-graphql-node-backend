@@ -6,7 +6,7 @@ const {
 const dbConnect = require('./db/dbConnect');
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
-
+const User = require('./models/User');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -24,8 +24,7 @@ dbConnect()
 
         // try to retrieve a user with the token
         // const user = await getUser(token);
-        const user = {};
-
+        const user = await User.findOne({ authToken: token });
         // optionally block the user
         // we could also check user roles/permissions here
         if (!user)
