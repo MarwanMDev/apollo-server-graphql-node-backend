@@ -45,5 +45,4 @@ dbConnect()
   })
   .then((res) => {
     console.log(`🚀  Server ready at ${res.url}`);
-    console.log(res);
   });
